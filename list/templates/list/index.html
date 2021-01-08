@@ -1,10 +1,7 @@
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<h1>careslist</h1>
+<p>Businesses who care enough about their customers to make sure all of them wear masks.</p>
 
-<form action="{% url 'list:add' %}" method="post">
-{% csrf_token %}
-<input type="text" name="business_name" id="business_name">
-<label for="business_name">Business name:</label><br>
-<input type="submit" value="Add">
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 {% if business_list %}
     <ul>
@@ -19,3 +16,12 @@
 {% else %}
 <p>No businesses are available.</p>
 {% endif %}
+
+<h2>Add a business</h2>
+<form action="{% url 'list:add' %}" method="post">
+{% csrf_token %}
+<label for="business_name">Name:</label><br>
+<input type="text" name="business_name" id="business_name"><br>
+<label for="business_zipcode">Zip:</label><br>
+<input type="text" name="business_zipcode" id="business_zipcode"><br>
+<input type="submit" value="Add">

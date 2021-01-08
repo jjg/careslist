@@ -17,7 +17,10 @@ class DetailView(generic.DetailView):
     template_name = "list/detail.html"
 
 def add(request):
-   business = Business(name=request.POST["business_name"]) 
-   business.save()
+    business = Business(
+        name=request.POST["business_name"],
+        zipcode=request.POST["business_zipcode"]
+    )
+    business.save()
 
-   return HttpResponseRedirect(reverse("list:index"))
+    return HttpResponseRedirect(reverse("list:index"))
