@@ -10,7 +10,10 @@ class IndexView(generic.ListView):
     #context_object_name = "business_list"
 
     def get_queryset(self):
-        return Business.objects.order_by("verified_date")
+        if "zipcode" in self.kwargs:
+            return Business.objects.filter(zipcode=self.kwargs["zipcode"])
+        else:
+            return Business.objects.order_by("verified_date")
 
 class DetailView(generic.DetailView):
     model = Business
