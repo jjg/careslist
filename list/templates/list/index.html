@@ -1,0 +1,21 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'list:add' %}" method="post">
+{% csrf_token %}
+<input type="text" name="business_name" id="business_name">
+<label for="business_name">Business name:</label><br>
+<input type="submit" value="Add">
+
+{% if business_list %}
+    <ul>
+    {% for business in business_list %}
+        <li><a href="{% url 'list:detail' business.id %}">{{ business.name }}</a>
+        {% if business.verified %}
+            ✅
+        {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+<p>No businesses are available.</p>
+{% endif %}
